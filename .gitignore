@@ -1,10 +1,60 @@
+# ======================================
+# Symfony / PHP Project .gitignore
+# ======================================
 
-###> symfony/framework-bundle ###
-/.env.local
-/.env.local.php
-/.env.*.local
-/config/secrets/prod/prod.decrypt.private.php
-/public/bundles/
-/var/
+# OS & Editor junk
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+# Composer
 /vendor/
-###< symfony/framework-bundle ###
+/composer.lock
+
+# Symfony cache & logs
+/var/cache/
+/var/log/
+/var/sessions/
+/var/test/
+/var/tmp/
+
+# Environment variables (!!! very important)
+.env
+.env.local
+.env.dev
+.env.prod
+.env.*.local
+.env.test
+.env.test.local
+
+# Custom local configuration
+/config/jwt/*.pem
+/config/secrets/*/*.*
+!/config/secrets/prod/prod.decrypt.private.php
+
+# Cache & build
+/public/bundles/
+/public/build/
+/node_modules/
+/npm-debug.log
+/yarn-error.log
+/.npm/
+/package-lock.json
+/yarn.lock
+
+# Coverage / PHPUnit
+/phpunit.xml
+/phpunit.xml.dist
+/coverage/
+/.phpunit.result.cache
+
+# Temporary / IDE / Misc
+/.env.backup
+*.bak
+*.tmp
+*.log
+*.cache
+/.phpunit.result.cache
+/.php-cs-fixer.cache
