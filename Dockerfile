@@ -1,19 +1,18 @@
-# PHP 8.3 image
 FROM php:8.3-cli
 
-# Sistem araçları ve composer kurulumu
 RUN apt-get update && apt-get install -y git unzip libicu-dev libzip-dev libpq-dev \
-    && docker-php-ext-install intl opcache pdo pdo_mysql pdo_pgsql zip \
+    && docker-php-ext-install intl opcache pdo pdo_pgsql pdo_mysql zip \
     && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# Çalışma dizini
 WORKDIR /app
 
-# Tüm dosyaları kopyala
 COPY . .
 
-# Bağımlılıkları yükle
-RUN composer install --no-dev --optimize-autoloader
+# ENV yüklenmeden sadece bağımlılıkları indir (no-scripts ekledik)
+RUN composer install --no-dev --optimize-autoloader --no-scripts
 
-# Symfony’nin public klasörünü servis et
+# Symfony production ortamı
+ENV APP_ENV=prod
+ENV APP_DEBUG=0
+
 CMD ["php", "-S", "0.0.0.0:10000", "-t", "public"]
